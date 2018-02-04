@@ -2,4 +2,4 @@
 
 ## Simple Pixel Art Coloring Fun
 
-###### [LIVE-DEMO](jmh-pixel-art.surge.sh)
+###### [LIVE-DEMO](http://jmh-pixel-art.surge.sh)
