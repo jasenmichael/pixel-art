@@ -22,7 +22,7 @@ body {
   display: inline-block;
 }
 
-#pallette {
+#palette {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -99,6 +99,10 @@ to {height: 5vh;}
 
 .red {
   background-color: rgb(255, 0, 0);
+}
+
+.black {
+  background-color: rgb(0, 0, 0);
 }
 
 button {

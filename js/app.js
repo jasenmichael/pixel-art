@@ -1,14 +1,14 @@
 const theCanvas = document.querySelector('.the-canvas')
-const pallette = document.getElementById('pallette')
+const palette = document.getElementById('palette')
 const wrapper = document.querySelector('.wrapper')
-const colors = ['violet', 'indigo', 'blue', 'green', 'yellow', 'orange', 'red']
-let selectedColor = "rgb(238, 130, 238)"
+const colors = ['violet', 'indigo', 'blue', 'green', 'yellow', 'orange', 'red', 'black']
+let selectedColor = "rgb(0, 0, 0)"
 
-//create pallette on startup
+//create palette on startup
 function createPalette() {
   for (let i = 0; i < colors.length; i++) {
     let color = document.createElement('div')
-    pallette.appendChild(color).classList.add('color-picker', colors[i])
+    palette.appendChild(color).classList.add('color-picker', colors[i])
   }
   theCanvas.style.backgroundColor = selectedColor
 }
@@ -29,7 +29,7 @@ function createCanvas() {
 createCanvas()
 
 //color selector
-pallette.addEventListener('click', event => {
+palette.addEventListener('click', event => {
   const targetStyle = window.getComputedStyle(event.target)
   let color = targetStyle.getPropertyValue("background-color")
   if (color !== 'rgba(0, 0, 0, 0)') {
@@ -66,8 +66,9 @@ theCanvas.addEventListener('mouseup', event => {
 
 //clear the screen
 var squares = document.getElementsByClassName('square')
+
 function clearSquares() {
-  for (var i = 0; i < squares.length; i++ ) {
+  for (var i = 0; i < squares.length; i++) {
     squares[i].style.backgroundColor = "rgb(255, 255, 255)"
     //todo pause, wait, or sleep  for about 20ms
     //sleep(20)
