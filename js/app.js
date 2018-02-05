@@ -1,78 +1,89 @@
-const theCanvas = document.querySelector('.the-canvas')
-const palette = document.getElementById('palette')
-const wrapper = document.querySelector('.wrapper')
-const colors = ['violet', 'indigo', 'blue', 'green', 'yellow', 'orange', 'red', 'black']
-let selectedColor = "rgb(0, 0, 0)"
+const theCanvas = document.querySelector('.the-canvas');
+const palette = document.getElementById('palette');
+const wrapper = document.querySelector('.wrapper');
+const colors = ['violet', 'indigo', 'blue', 'green', 'yellow', 'orange', 'red', 'black'];
+let selectedColor = "rgb(0, 0, 0)";
 
 //create palette on startup
 function createPalette() {
   for (let i = 0; i < colors.length; i++) {
-    let color = document.createElement('div')
-    palette.appendChild(color).classList.add('color-picker', colors[i])
+    let color = document.createElement('div');
+    palette.appendChild(color).classList.add('color-picker', colors[i]);
   }
-  theCanvas.style.backgroundColor = selectedColor
+  theCanvas.style.backgroundColor = selectedColor;
 }
-createPalette()
+createPalette();
 
 //create canvas on startup
 function createCanvas() {
-  let squareX = 40
-  let squareY = 28
-  theCanvas.style.width = (squareX * 20) + "px"
+  let squareX = 40;
+  let squareY = 28;
+  theCanvas.style.width = (squareX * 20) + "px";
 
   for (let i = 0; i < (squareX * squareY); i++) {
-    let newSquare = document.createElement('div')
-    newSquare.classList.add('square')
-    theCanvas.appendChild(newSquare)
+    let newSquare = document.createElement('div');
+    newSquare.classList.add('square');
+    theCanvas.appendChild(newSquare);
   }
 }
-createCanvas()
+
+createCanvas();
 
 //color selector
 palette.addEventListener('click', event => {
-  const targetStyle = window.getComputedStyle(event.target)
-  let color = targetStyle.getPropertyValue("background-color")
+  const targetStyle = window.getComputedStyle(event.target);
+  let color = targetStyle.getPropertyValue("background-color");
   if (color !== 'rgba(0, 0, 0, 0)') {
-    selectedColor = color
-    theCanvas.style.backgroundColor = color
-  }
+    selectedColor = color;
+    theCanvas.style.backgroundColor = color;
+  };
 })
 
 //click and color
+// Adding a class to sqaures that get colored
 theCanvas.addEventListener('click', event => {
   if (event.target.classList.contains('square')) {
-    let currentColor = getComputedStyle(event.target).backgroundColor
+    let currentColor = getComputedStyle(event.target).backgroundColor;
     if (currentColor === selectedColor) {
-      event.target.style.backgroundColor = "rgb(255, 255, 255)"
+      event.target.style.backgroundColor = "rgb(255, 255, 255)";
     } else {
       event.target.style.backgroundColor = selectedColor;
+      event.target.className += " test";
     }
-  }
-})
+  };
+});
+
+function testClear() {
+  var collection = Array.from(document.getElementsByClassName('test'));
+  for (var i = 0; i < collection.length; i++) {
+    (function(i) {
+      setTimeout(function() {
+        collection[i].style.backgroundColor = 'white';
+      }, 500 * i);
+    })(i);
+  };
+}
 
 //color with mouse held down
-let mouseIsDown = 0
+let mouseIsDown = 0;
 theCanvas.addEventListener('mousedown', event => {
-  mouseIsDown = 1
+  mouseIsDown = 1;
   theCanvas.onmousemove = event => {
     if (mouseIsDown) {
-      event.target.style.backgroundColor = selectedColor
+      event.target.style.backgroundColor = selectedColor;
+      event.target.className += ' test';
     }
   }
-})
+});
 theCanvas.addEventListener('mouseup', event => {
-  mouseIsDown = 0
+  mouseIsDown = 0;
 })
 
 //clear the screen
-var squares = document.getElementsByClassName('square')
+//var squares = Array.from(document.getElementsByClassName('square'));
 
 function clearSquares() {
-  for (var i = 0; i < squares.length; i++) {
-    squares[i].style.backgroundColor = "rgb(255, 255, 255)"
-    //todo pause, wait, or sleep  for about 20ms
-    //sleep(20)
-  }
+  testClear();
 }
 
 //todo save as jpeg
